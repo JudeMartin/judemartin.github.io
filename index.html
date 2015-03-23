@@ -1,1 +1,287 @@
-Hello World
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    section{
+     padding: 2%;
+    }
+    body{
+      margin: 10% auto;
+
+      width:50%;
+      border: solid;
+      border-radius: 2%;
+
+      /*
+      margin-top: 10%;
+      margin-left: 25%;
+      margin-right: auto;
+      border: solid;
+      border-radius: 2%;
+    */
+    }
+.submit {
+  -moz-box-shadow:inset -5px 1px 0px -13px #cae3fc;
+  -webkit-box-shadow:inset -5px 1px 0px -13px #cae3fc;
+  box-shadow:inset -5px 1px 0px -13px #cae3fc;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+  background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+  background-color:#79bbff;
+  -webkit-border-top-left-radius:11px;
+  -moz-border-radius-topleft:11px;
+  border-top-left-radius:11px;
+  -webkit-border-top-right-radius:11px;
+  -moz-border-radius-topright:11px;
+  border-top-right-radius:11px;
+  -webkit-border-bottom-right-radius:11px;
+  -moz-border-radius-bottomright:11px;
+  border-bottom-right-radius:11px;
+  -webkit-border-bottom-left-radius:11px;
+  -moz-border-radius-bottomleft:11px;
+  border-bottom-left-radius:11px;
+  text-indent:1px;
+  border:1px solid #469df5;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:17px;
+  font-weight:bold;
+  font-style:normal;
+  height:21px;
+  line-height:17px;
+  width:95px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #287ace;
+}
+.submit:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4197ee), color-stop(1, #79bbff) );
+  background:-moz-linear-gradient( center top, #4197ee 5%, #79bbff 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4197ee', endColorstr='#79bbff');
+  background-color:#4197ee;
+}.submit:active {
+  position:relative;
+  top:1px;
+}
+
+    h3{
+      margin-top: 0px;
+      text-align: center;
+      background: #759CF6;
+      color: white;
+
+    }
+
+    </style>
+    <title>Registration Page</title>
+  </head>
+    <script>
+     function regValidation()
+      {
+        var passwd = document.getElementById("passwd").value;
+        var specialRegex = /\W/g;
+        var capRegex = new RegExp("[A-Z]","g");
+        var smallRegex  = new RegExp("[a-z]","g");
+       
+     
+        var capLength=0;
+        var smallLength=0;
+        var specialLength=0;
+
+        var capPassMatch = passwd.match(capRegex);
+        var smallPassMatch = passwd.match(smallRegex);
+        var specialPassMatch = passwd.match(specialRegex);
+        
+
+
+    if(capPassMatch){console.log("cap" + capPassMatch.length); capLength = capPassMatch.length;}
+    if(smallPassMatch){console.log("SMAL"+smallPassMatch.length);smallLength = smallPassMatch.length;}
+    if(specialPassMatch){"special"+console.log(specialPassMatch.length);specialLength = specialPassMatch.length;}
+
+   return [capLength,smallLength,specialLength];
+   }
+      function pgrsBar(){
+       
+        var arr = regValidation();
+        if ((arr[0] >= 3 && arr[1] >= 2) && (arr[2] == 2) ) {
+         var bar = document.getElementById('pgress');
+           bar.value = 300;
+
+        } else if ((arr[0] >= 3 && arr[1] >= 2 ) && (arr[2] >2 && arr[2] < 6 ) ){
+            var bar = document.getElementById('pgress');
+            bar.value = 700;
+
+        }
+        else if ((arr[0] >= 3 )  && (arr[1] >= 2 && arr[2] > 5) ){
+          var bar  = document.getElementById('pgress');
+          bar.value = 1000;
+
+        }
+        else {
+          var bar = document.getElementById('pgress');
+          bar.value = 0;
+
+        }
+
+  
+  }
+
+  function validatePswd(){
+
+     var arr = regValidation();
+    var pswd = document.getElementById('passwd').value;
+    var confPswd = document.getElementById('confpasswd').value;
+    if(pswd!==confPswd){
+      alert("the passwords do not match please enter again");
+      return false;
+
+
+    }
+     if ((arr[0] < 3 || arr[1] < 2) || (arr[2] < 2) ) {
+         alert("the password does not match the minimum criteria");
+         return false;
+
+        } 
+      if(typeof(Storage)!== "undefined"){
+        sessionStorage.firstname = document.getElementById("fname").value;
+        sessionStorage.setItem("lastname",document.getElementById("lname").value);
+        
+        sessionStorage.setItem("email",document.getElementById("emal").value);
+        sessionStorage.setItem("password ",document.getElementById("passwd").value);  
+        
+        sessionStorage.setItem("DOB",document.getElementById("dateofBirth").value);
+
+        sessionStorage.setItem("DateofBirthTime",document.getElementById("dateofBirthTime").value);
+
+        sessionStorage.setItem("SSN",document.getElementById("ssn").value);
+
+        sessionStorage.setItem("phone",document.getElementById("phone").value);
+
+        sessionStorage.setItem("creditcard",document.getElementById("creditCard").value);
+
+      }
+
+return false;
+
+
+  }
+  window.addEventListener("offline",localfn);
+  function localfn(event){
+        if(typeof(Storage)!== "undefined"){
+        
+        localStorage.firstname = document.getElementById("fname").value;
+        localStorage.setItem("lastname",document.getElementById("lname").value);
+        
+        localStorage.setItem("email",document.getElementById("emal").value);
+        localStorage.setItem("password ",document.getElementById("passwd").value);  
+        
+        localStorage.setItem("DOB",document.getElementById("dateofBirth").value);
+
+        localStorage.setItem("DateofBirthTime",document.getElementById("dateofBirthTime").value);
+
+        localStorage.setItem("SSN",document.getElementById("ssn").value);
+
+        localStorage.setItem("phone",document.getElementById("phone").value);
+
+        localStorage.setItem("creditcard",document.getElementById("creditCard").value);
+        alert("Currently in offline mode Saving the data to Local Storage");
+       
+      }
+  }
+   </script>
+    <script src="modernizr.js">
+    </script>
+    <script>
+    function checklocal(){
+        if (Modernizr.localstorage) {
+          alert('Browser supports Local Storage');
+        } else{
+          alert('Browser does not support Local Storage');
+        }
+    }
+    function checksession(){
+        if (Modernizr.sessionstorage) {
+                  alert('The Browser supports Session Storage');
+                } else{
+                  alert('The Browser does not support Session Storage');
+                }
+        }
+    
+    </script>
+
+  <body>
+      <form action="#" onsubmit = "validatePswd()" name = "myForm" method="post">
+        <h3>Registration Page</h3>
+
+        <section>
+          <table style="width:25%">
+            <tr>
+              <td>First Name</td>
+              <td><input type = "text"  id="fname" required name="firstname" placeholder="Enter first name" style = "width:150px"></td>
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td><input type = "text" required id= "lname" name="lastname" placeholder="Enter last name" style = "width:150px"></td>
+            </tr>
+              <tr>
+                <td>Email</td>
+                <td><input type = "email" name="email"  id="emal" required placeholder="Enter email" style = "width:150px"></td>
+              </tr>
+              <tr>
+                <td>Password</td>
+                <td><input type = "password" required name="password" id="passwd" onkeyup="pgrsBar()" maxlength = "24" placeholder="Enter password" style = "width:150px"></td>
+              <td><img title="Password must contain minimum 3 upper case, 2 lower case and 2 special characters" src = helpDisplay.jpg width = 15 height = 15></img></td>
+              <td><progress id="pgress" value = "0" max = "1000" ></progress></td>
+              </tr>
+              
+              
+              <tr>
+                <td>Confirm Password</td>
+                <td><input type = "password" required id="confpasswd" maxlength = "24" name="confirmpassword" placeholder="Must be same as Password" style = "width:150px"> </td>
+              </tr>
+
+              
+              <tr>
+                <td>DOB</td>
+                <td> <input type="date" required id ="dateofBirth" name="dateofbirth" style = "width:150px" ></td>
+              </tr>
+
+              <tr>
+                <td>DOB with time</td>
+                <td> <input type="datetime" required id ="dateofBirthTime" name="dateofbirthtime" style = "width:150px" ></td>
+              </tr>
+
+              <tr>
+                <td>Local DOB</td>
+                <td> <input type="datetime-local" required name="localdateofbirthdate" style = "width:150px" ></td>
+              </tr>
+
+              <tr>
+                <td>SSN</td>
+                <td><input type = "text" id="ssn" required name="ssn" pattern="^\d{3}-\d{2}-\d{4}$" title="###-##-####"  placeholder="###-##-####"style = "width:150px"> </td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td><input type = "text" id="phone" required name="phone" pattern="^\d{3}-\d{3}-\d{4}$" title="###-###-####" placeholder="###-###-####" style = "width:150px"> </td>
+              </tr>
+              <tr>
+                <td>Credit Card</td>
+                <td><input type = "text" id="creditCard" required name="creditcard" pattern="[0-9]{12,16}" title="Enter a Valid Credit Card Number" placeholder="Enter Credit Card" style = "width:150px"> </td>
+              </tr>
+              <tr>
+                <td><input  class = "submit" type="submit" value="Create" ></td>
+              </tr>
+                <tr>
+                <td><input type="button" onclick="checksession()">"Check Session Storage"</button></td>
+                <td><input type="button" onclick="checklocal()" value="Check Local Storage"></button></td>
+              </tr>
+             </table>
+          </section> 
+      </form>
+  </body>
+</html>
+
+
+         
+
